@@ -8,8 +8,8 @@ A comprehensive full-stack web application that transforms your PDF documents an
 
 ### 🎥 **Choose Your Preferred Platform:**
 
-[![YouTube Demo](https://img.shields.io/badge/▶️_Watch_on_YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/QdaeE-z0G-Q)
-[![Google Drive Demo](https://img.shields.io/badge/▶️_Watch_on_Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1KVxm6tj6qO7KXTkJBTL2mUTb1dyvjLsW/view?usp=sharing)
+[![YouTube Demo](https://img.shields.io/badge/▶️_Watch_on_YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/LK9sMExqTTg)
+
 
 ### 📺 **Quick Access Links:**
 - **[🎬 YouTube](https://youtu.be/QdaeE-z0G-Q)** - Stream instantly with comments and sharing
