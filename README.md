@@ -13,7 +13,7 @@ A comprehensive full-stack web application that transforms your PDF documents an
 
 ### 📺 **Quick Access Links:**
 - **[🎬 YouTube](https://youtu.be/QdaeE-z0G-Q)** - Stream instantly with comments and sharing
-- **[🎥 Google Drive](https://drive.google.com/file/d/1KVxm6tj6qO7KXTkJBTL2mUTb1dyvjLsW/view?usp=sharing)** - High quality download option
+
 - **[📱 Mobile Optimized](https://youtu.be/QdaeE-z0G-Q)** - Best experience on mobile devices
 
 ### 🌟 What you'll see in the demo:
