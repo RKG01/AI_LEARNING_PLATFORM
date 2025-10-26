@@ -11,7 +11,6 @@ import FlashcardView from './components/FlashcardView';
 import QuizView from './components/QuizView';
 import ProgressAnalytics from './components/ProgressAnalytics';
 import CommunityLibrary from './components/CommunityLibrary';
-import DebugInfo from './components/DebugInfo';
 
 const MainApp = () => {
   const [activeTab, setActiveTab] = useState('upload');
@@ -87,7 +86,6 @@ function App() {
     <AuthProvider>
       <ProgressProvider>
         <MainApp />
-        <DebugInfo />
       </ProgressProvider>
     </AuthProvider>
   );

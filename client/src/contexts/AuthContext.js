@@ -11,19 +11,7 @@ export const useAuth = () => {
   return context;
 };
 
-// Robust API URL construction to handle any trailing slash issues
-const rawApiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-let API_BASE_URL = rawApiUrl.replace(/\/+$/, ''); // Remove trailing slashes
-
-// Ensure it ends with /api if not already present
-if (!API_BASE_URL.endsWith('/api')) {
-  API_BASE_URL = API_BASE_URL + '/api';
-}
-
-// Debug logging to see what's actually being used
-console.log('🔍 AuthContext Debug:');
-console.log('Raw env var:', process.env.REACT_APP_API_URL);
-console.log('Final API_BASE_URL:', API_BASE_URL);
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -68,11 +56,11 @@ export const AuthProvider = ({ children }) => {
       });
 
       const { token: newToken, user: userData } = response.data;
-
+      
       localStorage.setItem('token', newToken);
       setToken(newToken);
       setUser(userData);
-
+      
       return { success: true };
     } catch (error) {
       return {
@@ -91,11 +79,11 @@ export const AuthProvider = ({ children }) => {
       });
 
       const { token: newToken, user: userData } = response.data;
-
+      
       localStorage.setItem('token', newToken);
       setToken(newToken);
       setUser(userData);
-
+      
       return { success: true };
     } catch (error) {
       return {

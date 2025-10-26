@@ -25,11 +25,12 @@ router.post('/register', [
     .isLength({ min: 6 })
     .withMessage('Password must be at least 6 characters long')
 ], async (req, res) => {
+  console.log('🔍 Register attempt:', { name: req.body.name, email: req.body.email, hasPassword: !!req.body.password });
   try {
     // Check validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Validation failed',
         details: errors.array()
       });
@@ -75,11 +76,12 @@ router.post('/login', [
     .notEmpty()
     .withMessage('Password is required')
 ], async (req, res) => {
+  console.log('🔍 Login attempt:', { email: req.body.email, hasPassword: !!req.body.password });
   try {
     // Check validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Validation failed',
         details: errors.array()
       });

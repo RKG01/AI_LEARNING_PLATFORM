@@ -124,7 +124,11 @@ A comprehensive full-stack web application that transforms your PDF documents an
    
    **Frontend** (`client/.env`):
    ```env
+   # For local development
    REACT_APP_API_URL=http://localhost:5000/api
+   
+   # For production (using deployed backend)
+   REACT_APP_API_URL=https://ai-learning-platform-1-o92t.onrender.com/api
    ```
 
 4. **Start the development servers**
