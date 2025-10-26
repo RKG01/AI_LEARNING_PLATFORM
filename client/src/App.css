@@ -1374,8 +1374,9 @@ nime character decorations */
   50% {
     transform: translateY(-8px);
   }
-}/
-* Voice Narration Controls */
+}
+
+/* Voice Narration Controls */
 .voice-controls {
   background: var(--glass-bg-strong);
   backdrop-filter: blur(25px);
@@ -1399,8 +1400,15 @@ nime character decorations */
 }
 
 @keyframes shimmer {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .voice-controls-header {
@@ -1437,18 +1445,32 @@ nime character decorations */
   animation: soundWave 1s ease-in-out infinite;
 }
 
-.sound-wave.active span:nth-child(1) { animation-delay: 0s; }
-.sound-wave.active span:nth-child(2) { animation-delay: 0.1s; }
-.sound-wave.active span:nth-child(3) { animation-delay: 0.2s; }
-.sound-wave.active span:nth-child(4) { animation-delay: 0.3s; }
+.sound-wave.active span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.sound-wave.active span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.sound-wave.active span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.sound-wave.active span:nth-child(4) {
+  animation-delay: 0.3s;
+}
 
 @keyframes soundWave {
-  0%, 100% { 
-    height: 10px; 
+
+  0%,
+  100% {
+    height: 10px;
     background: var(--sky-blue);
   }
-  50% { 
-    height: 25px; 
+
+  50% {
+    height: 25px;
     background: var(--light-orange);
     box-shadow: 0 0 10px var(--light-orange);
   }
@@ -1527,11 +1549,14 @@ nime character decorations */
 }
 
 @keyframes pulse-glow {
-  0%, 100% { 
+
+  0%,
+  100% {
     box-shadow: 0 0 20px var(--shadow-orange);
     transform: scale(1);
   }
-  50% { 
+
+  50% {
     box-shadow: 0 0 30px var(--shadow-orange);
     transform: scale(1.02);
   }
@@ -1618,33 +1643,33 @@ nime character decorations */
   .voice-controls {
     padding: 1.5rem;
   }
-  
+
   .voice-controls-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
   }
-  
+
   .voice-select {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .voice-controls-buttons {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .voice-btn {
     width: 100%;
     max-width: 200px;
   }
-  
+
   .voice-sliders {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .voice-dropdown {
     width: 100%;
     max-width: 300px;
@@ -1654,7 +1679,7 @@ nime character decorations */
 /* Special kawaii effects for voice controls */
 .voice-controls:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 15px 50px rgba(0, 0, 0, 0.4),
     0 0 30px var(--shadow-light);
 }
@@ -1682,15 +1707,20 @@ nime character decorations */
 }
 
 @keyframes musical-note {
-  0%, 100% { 
+
+  0%,
+  100% {
     transform: rotate(-5deg) scale(1);
     opacity: 0.4;
   }
-  50% { 
+
+  50% {
     transform: rotate(5deg) scale(1.1);
     opacity: 0.7;
   }
-}/* P
+}
+
+/* P
 rogress Analytics Styles */
 .progress-analytics {
   max-width: 1400px;
@@ -1728,8 +1758,15 @@ rogress Analytics Styles */
 }
 
 @keyframes rainbow-flow {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .level-info {
@@ -1749,8 +1786,15 @@ rogress Analytics Styles */
 }
 
 @keyframes level-glow {
-  0%, 100% { box-shadow: 0 8px 25px var(--shadow-light); }
-  50% { box-shadow: 0 12px 35px var(--shadow-light); }
+
+  0%,
+  100% {
+    box-shadow: 0 8px 25px var(--shadow-light);
+  }
+
+  50% {
+    box-shadow: 0 12px 35px var(--shadow-light);
+  }
 }
 
 .level-number {
@@ -1780,8 +1824,15 @@ rogress Analytics Styles */
 }
 
 @keyframes xp-shimmer {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .xp-text {
@@ -1812,8 +1863,15 @@ rogress Analytics Styles */
 }
 
 @keyframes motivation-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
 }
 
 .study-streak {
@@ -1885,7 +1943,7 @@ rogress Analytics Styles */
 
 .stat-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.4),
     0 0 40px var(--shadow-light);
 }
@@ -1896,8 +1954,15 @@ rogress Analytics Styles */
 }
 
 @keyframes stat-bounce {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 .stat-info h3 {
@@ -1932,8 +1997,15 @@ rogress Analytics Styles */
 }
 
 @keyframes progress-shimmer {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .progress-fill.uploads {
@@ -1972,7 +2044,7 @@ rogress Analytics Styles */
 
 .chart-card:hover {
   transform: translateY(-4px);
-  box-shadow: 
+  box-shadow:
     0 15px 50px rgba(0, 0, 0, 0.4),
     0 0 30px var(--shadow-light);
 }
@@ -2067,8 +2139,15 @@ rogress Analytics Styles */
 }
 
 @keyframes achievement-glow {
-  0%, 100% { box-shadow: 0 4px 15px rgba(107, 70, 193, 0.2); }
-  50% { box-shadow: 0 8px 25px rgba(107, 70, 193, 0.4); }
+
+  0%,
+  100% {
+    box-shadow: 0 4px 15px rgba(107, 70, 193, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 8px 25px rgba(107, 70, 193, 0.4);
+  }
 }
 
 .achievement-item:hover {
@@ -2082,8 +2161,15 @@ rogress Analytics Styles */
 }
 
 @keyframes achievement-bounce {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.1) rotate(5deg); }
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
 }
 
 .achievement-details h4 {
@@ -2144,9 +2230,19 @@ rogress Analytics Styles */
 }
 
 @keyframes celebration {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.1) rotate(-5deg); }
-  75% { transform: scale(1.1) rotate(5deg); }
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  75% {
+    transform: scale(1.1) rotate(5deg);
+  }
 }
 
 .achievement-text h4 {
@@ -2169,45 +2265,45 @@ rogress Analytics Styles */
   .progress-analytics {
     padding: 1rem;
   }
-  
+
   .progress-header {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 1.5rem;
   }
-  
+
   .stats-overview {
     grid-template-columns: 1fr;
   }
-  
+
   .charts-section {
     grid-template-columns: 1fr;
   }
-  
+
   .doughnut-container canvas {
     max-width: 180px !important;
     max-height: 180px !important;
   }
-  
+
   .achievements-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .achievement-notification {
     top: 1rem;
     right: 1rem;
     left: 1rem;
     max-width: none;
   }
-  
+
   .chart-container {
     height: 250px;
   }
-  
+
   .doughnut-container {
     height: 200px !important;
   }
-  
+
   .doughnut-container canvas {
     max-width: 150px !important;
     max-height: 150px !important;
@@ -2220,20 +2316,22 @@ rogress Analytics Styles */
     text-align: center;
     gap: 1rem;
   }
-  
+
   .achievement-item {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .level-badge {
     padding: 0.75rem 1rem;
   }
-  
+
   .level-number {
     font-size: 1.2rem;
   }
-}/* Scor
+}
+
+/* Scor
 e Chart Specific Styles */
 .score-chart {
   max-width: 300px;
@@ -2292,12 +2390,12 @@ e Chart Specific Styles */
   .score-chart {
     max-width: 100%;
   }
-  
+
   .score-chart .doughnut-container {
     width: 180px;
     height: 180px;
   }
-  
+
   .score-chart .doughnut-container canvas {
     width: 180px !important;
     height: 180px !important;
@@ -2311,22 +2409,24 @@ e Chart Specific Styles */
     width: 150px;
     height: 150px;
   }
-  
+
   .score-chart .doughnut-container canvas {
     width: 150px !important;
     height: 150px !important;
     max-width: 150px !important;
     max-height: 150px !important;
   }
-  
+
   .score-number {
     font-size: 2rem !important;
   }
-  
+
   .score-label {
     font-size: 1rem !important;
   }
-}/* Com
+}
+
+/* Com
 munity Library Styles */
 .community-library {
   max-width: 1400px;
@@ -2363,8 +2463,15 @@ munity Library Styles */
 }
 
 @keyframes community-flow {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .header-content h2 {
@@ -2521,6 +2628,7 @@ munity Library Styles */
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2548,7 +2656,8 @@ munity Library Styles */
   margin-bottom: 0.5rem;
 }
 
-.form-input, .form-textarea {
+.form-input,
+.form-textarea {
   width: 100%;
   padding: 1rem;
   background: var(--glass-bg);
@@ -2562,13 +2671,15 @@ munity Library Styles */
   resize: vertical;
 }
 
-.form-input:focus, .form-textarea:focus {
+.form-input:focus,
+.form-textarea:focus {
   outline: none;
   border-color: var(--primary-purple);
   box-shadow: 0 0 15px var(--shadow-light);
 }
 
-.form-input::placeholder, .form-textarea::placeholder {
+.form-input::placeholder,
+.form-textarea::placeholder {
   color: var(--dark-sky-blue) !important;
   font-family: 'Inter', sans-serif !important;
 }
@@ -2598,6 +2709,7 @@ munity Library Styles */
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2622,7 +2734,7 @@ munity Library Styles */
 
 .material-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.4),
     0 0 40px var(--shadow-light);
 }
@@ -2744,8 +2856,15 @@ munity Library Styles */
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1.1); }
-  50% { transform: scale(1.2); }
+
+  0%,
+  100% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .download-btn {
@@ -2840,49 +2959,49 @@ munity Library Styles */
   .community-library {
     padding: 1rem;
   }
-  
+
   .library-header {
     flex-direction: column;
     gap: 2rem;
     text-align: center;
   }
-  
+
   .community-stats {
     flex-wrap: wrap;
     gap: 1rem;
   }
-  
+
   .library-controls {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .search-filters {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .filters {
     flex-wrap: wrap;
     width: 100%;
   }
-  
+
   .filter-select {
     flex: 1;
     min-width: 100px;
   }
-  
+
   .materials-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .material-actions {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .action-buttons {
     justify-content: center;
   }
@@ -2892,30 +3011,32 @@ munity Library Styles */
   .material-card {
     padding: 1.5rem;
   }
-  
+
   .material-header {
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
   }
-  
+
   .stats {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  
+
   .community-stats {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .stat-item {
     padding: 0.75rem 1rem;
   }
-  
+
   .stat-number {
     font-size: 1.4rem !important;
   }
-}/* C
+}
+
+/* C
 ommunity Library Styles */
 .community-library {
   max-width: 1400px;
@@ -2952,8 +3073,15 @@ ommunity Library Styles */
 }
 
 @keyframes community-flow {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .header-content h2 {
@@ -3073,6 +3201,7 @@ ommunity Library Styles */
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -3100,7 +3229,8 @@ ommunity Library Styles */
   margin-bottom: 0.5rem;
 }
 
-.form-input, .form-textarea {
+.form-input,
+.form-textarea {
   width: 100%;
   padding: 1rem;
   background: var(--glass-bg);
@@ -3114,13 +3244,15 @@ ommunity Library Styles */
   resize: vertical;
 }
 
-.form-input:focus, .form-textarea:focus {
+.form-input:focus,
+.form-textarea:focus {
   outline: none;
   border-color: var(--primary-purple);
   box-shadow: 0 0 15px var(--shadow-light);
 }
 
-.form-input::placeholder, .form-textarea::placeholder {
+.form-input::placeholder,
+.form-textarea::placeholder {
   color: var(--dark-sky-blue) !important;
   font-family: 'Inter', sans-serif !important;
 }
@@ -3150,6 +3282,7 @@ ommunity Library Styles */
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -3174,7 +3307,7 @@ ommunity Library Styles */
 
 .material-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.4),
     0 0 40px var(--shadow-light);
 }
@@ -3296,8 +3429,15 @@ ommunity Library Styles */
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1.1); }
-  50% { transform: scale(1.2); }
+
+  0%,
+  100% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .download-btn {
@@ -3372,44 +3512,44 @@ ommunity Library Styles */
   .community-library {
     padding: 1rem;
   }
-  
+
   .library-header {
     flex-direction: column;
     gap: 2rem;
     text-align: center;
   }
-  
+
   .library-controls {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .search-filters {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .filters {
     flex-wrap: wrap;
     width: 100%;
   }
-  
+
   .filter-select {
     flex: 1;
     min-width: 100px;
   }
-  
+
   .materials-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .material-actions {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .action-buttons {
     justify-content: center;
   }
