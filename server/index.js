@@ -16,26 +16,29 @@ connectDB();
 // Middleware
 const allowedOrigins = [
   'http://localhost:3000',
-  process.env.FRONTEND_URL || 'https://ai-learning-platform-a1bg-olo8qzc0g.vercel.app'
-];
+  'https://localhost:3000',
+  'https://ai-learning-platform-a1bg-olo8qzc0g.vercel.app',
+  'https://ai-learning-platform-a1bg.vercel.app',
+  process.env.FRONTEND_URL
+].filter(Boolean); // Remove any undefined values
 
 // Log allowed origins for debugging
 console.log('Allowed CORS origins:', allowedOrigins);
 
+// Temporarily allow all origins for debugging
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true, // Allow all origins temporarily
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
 };
+
+// Add debugging middleware before CORS
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+  next();
+});
 
 app.use(cors(corsOptions));
 app.use(express.json());
