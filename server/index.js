@@ -18,6 +18,7 @@ const allowedOrigins = [
   'http://localhost:3000',
   'https://localhost:3000',
   'https://ai-learning-platform-a1bg-olo8qzc0g.vercel.app',
+  'https://ai-learning-platform-a1bg-ogg3wn7hm.vercel.app',
   'https://ai-learning-platform-a1bg.vercel.app',
   process.env.FRONTEND_URL
 ].filter(Boolean); // Remove any undefined values
