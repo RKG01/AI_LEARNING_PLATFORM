@@ -7,12 +7,25 @@ const FileList = ({ onFileSelect, selectedFileId }) => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [pagination, setPagination] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchFiles = async () => {
+  const fetchFiles = async (page = 1) => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/files`);
-      setFiles(response.data);
+      const response = await axios.get(`${API_BASE_URL}/files?page=${page}&limit=10`);
+      
+      // Handle both old and new response formats
+      if (response.data.files) {
+        setFiles(response.data.files);
+        setPagination(response.data.pagination);
+      } else {
+        // Fallback for old format
+        setFiles(response.data);
+        setPagination({});
+      }
+      
+      setCurrentPage(page);
       setError('');
     } catch (err) {
       console.error('Error fetching files:', err);
@@ -75,7 +88,7 @@ const FileList = ({ onFileSelect, selectedFileId }) => {
 
   return (
     <div className="card">
-      <h3>👩‍📚 Your Files ({files.length})</h3>
+      <h3>👩‍📚 Your Files {pagination.totalFiles ? `(${pagination.totalFiles})` : `(${files.length})`}</h3>
       
       {files.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
@@ -83,28 +96,64 @@ const FileList = ({ onFileSelect, selectedFileId }) => {
           <p>Upload your first PDF or text file to get started!</p>
         </div>
       ) : (
-        <div className="file-list">
-          {files.map((file) => (
-            <div
-              key={file._id}
-              className={`file-item ${selectedFileId === file._id ? 'selected' : ''}`}
-              onClick={() => onFileSelect(file._id)}
-            >
-              <div>
-                <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>
-                  📄 {file.originalName}
+        <>
+          <div className="file-list">
+            {files.map((file) => (
+              <div
+                key={file._id}
+                className={`file-item ${selectedFileId === file._id ? 'selected' : ''}`}
+                onClick={() => onFileSelect(file._id)}
+              >
+                <div>
+                  <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>
+                    📄 {file.originalName}
+                  </div>
+                  <div style={{ fontSize: '0.9rem', color: '#666' }}>
+                    Uploaded: {formatDate(file.uploadDate)}
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.9rem', color: '#666' }}>
-                  Uploaded: {formatDate(file.uploadDate)}
+                
+                <div style={{ fontSize: '0.9rem', color: '#007bff' }}>
+                  {selectedFileId === file._id ? '✓ Selected' : 'Click to select'}
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* Pagination Controls */}
+          {pagination.totalPages > 1 && (
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              gap: '1rem', 
+              marginTop: '1rem',
+              padding: '1rem 0'
+            }}>
+              <button
+                onClick={() => fetchFiles(currentPage - 1)}
+                disabled={!pagination.hasPrevPage}
+                className="btn btn-secondary"
+                style={{ opacity: pagination.hasPrevPage ? 1 : 0.5 }}
+              >
+                ← Previous
+              </button>
               
-              <div style={{ fontSize: '0.9rem', color: '#007bff' }}>
-                {selectedFileId === file._id ? '✓ Selected' : 'Click to select'}
-              </div>
+              <span style={{ fontSize: '0.9rem', color: '#666' }}>
+                Page {pagination.currentPage} of {pagination.totalPages}
+              </span>
+              
+              <button
+                onClick={() => fetchFiles(currentPage + 1)}
+                disabled={!pagination.hasNextPage}
+                className="btn btn-secondary"
+                style={{ opacity: pagination.hasNextPage ? 1 : 0.5 }}
+              >
+                Next →
+              </button>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
       
       {selectedFileId && (

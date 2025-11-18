@@ -93,16 +93,40 @@ router.post('/progress/update', auth, async (req, res) => {
   }
 });
 
-// GET /progress/leaderboard - Get top performers (optional feature)
+// GET /progress/leaderboard - Get top performers with pagination
 router.get('/progress/leaderboard', auth, async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Get total count
+    const totalUsers = await UserProgress.countDocuments();
+
+    // Get paginated leaderboard
     const topPerformers = await UserProgress.find()
       .populate('userId', 'name')
       .sort({ avgScore: -1, quizzesAttempted: -1 })
-      .limit(10)
+      .skip(skip)
+      .limit(limit)
       .select('userId avgScore quizzesAttempted studyStreak');
-    
-    res.json(topPerformers);
+
+    // Calculate pagination info
+    const totalPages = Math.ceil(totalUsers / limit);
+    const hasNextPage = page < totalPages;
+    const hasPrevPage = page > 1;
+
+    res.json({
+      leaderboard: topPerformers,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalUsers,
+        hasNextPage,
+        hasPrevPage,
+        limit
+      }
+    });
   } catch (error) {
     console.error('Error fetching leaderboard:', error);
     res.status(500).json({ error: 'Failed to fetch leaderboard data' });

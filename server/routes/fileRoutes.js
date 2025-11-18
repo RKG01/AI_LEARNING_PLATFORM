@@ -97,11 +97,41 @@ router.post('/upload', auth, (req, res) => {
     });
 });
 
-// GET /files - Get all uploaded files for the authenticated user
+// GET /files - Get all uploaded files for the authenticated user with pagination
 router.get('/files', auth, async (req, res) => {
     try {
-        const files = await File.find({ userId: req.userId }, 'filename originalName uploadDate').sort({ uploadDate: -1 });
-        res.json(files);
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        // Get total count for pagination info
+        const totalFiles = await File.countDocuments({ userId: req.userId });
+        
+        // Get paginated files
+        const files = await File.find(
+            { userId: req.userId }, 
+            'filename originalName uploadDate'
+        )
+        .sort({ uploadDate: -1 })
+        .skip(skip)
+        .limit(limit);
+
+        // Calculate pagination info
+        const totalPages = Math.ceil(totalFiles / limit);
+        const hasNextPage = page < totalPages;
+        const hasPrevPage = page > 1;
+
+        res.json({
+            files,
+            pagination: {
+                currentPage: page,
+                totalPages,
+                totalFiles,
+                hasNextPage,
+                hasPrevPage,
+                limit
+            }
+        });
     } catch (error) {
         console.error('Error fetching files:', error);
         res.status(500).json({ error: 'Failed to fetch files' });
