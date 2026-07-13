@@ -1,0 +1,36 @@
+/* Auth CSS — only contains what inline styles cannot do */
+
+/* Spinner keyframe used by LoginForm & RegisterForm */
+@keyframes authSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Top accent line on the glass card */
+.al-card-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+}
+
+/* Input autofill dark background fix */
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover,
+.auth-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #0d1120 inset !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+
+/* Responsive: hide left panel on mobile */
+@media (max-width: 860px) {
+  .auth-left-panel { display: none !important; }
+  .auth-right-panel {
+    width: 100% !important;
+    padding: 48px 20px 32px !important;
+  }
+}

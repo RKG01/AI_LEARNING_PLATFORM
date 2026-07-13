@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
-import Login from './Login';
-import Register from './Register';
+import AuthLayout from './auth/AuthLayout';
+import LoginForm from './auth/LoginForm';
+import RegisterForm from './auth/RegisterForm';
+
+const LAYOUT_PROPS = {
+  login: {
+    heading: 'Learn smarter, not harder.',
+    subheading: 'AI-powered study tools that turn any document into flashcards, quizzes, and summaries in seconds.',
+  },
+  register: {
+    heading: 'Your AI study partner awaits.',
+    subheading: 'Join thousands of students who are acing exams with personalized, AI-generated study materials.',
+  },
+};
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const props = isLogin ? LAYOUT_PROPS.login : LAYOUT_PROPS.register;
 
   return (
-    <div className="auth-page">
+    <AuthLayout heading={props.heading} subheading={props.subheading}>
       {isLogin ? (
-        <Login onSwitchToRegister={() => setIsLogin(false)} />
+        <LoginForm onSwitchToRegister={() => setIsLogin(false)} />
       ) : (
-        <Register onSwitchToLogin={() => setIsLogin(true)} />
+        <RegisterForm onSwitchToLogin={() => setIsLogin(true)} />
       )}
-    </div>
+    </AuthLayout>
   );
 };
 

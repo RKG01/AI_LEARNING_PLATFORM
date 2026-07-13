@@ -30,10 +30,28 @@ export const AuthProvider = ({ children }) => {
   // Check if user is logged in on app start
   useEffect(() => {
     const checkAuth = async () => {
-      const savedToken = localStorage.getItem('token');
+      // Handle OAuth redirect token in URL
+      const params = new URLSearchParams(window.location.search);
+      const oauthToken = params.get('oauth_token');
+      const oauthError = params.get('oauth_error');
+
+      if (oauthToken) {
+        localStorage.setItem('token', oauthToken);
+        setToken(oauthToken);
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+
+      if (oauthError) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+        setLoading(false);
+        return;
+      }
+
+      const savedToken = oauthToken || localStorage.getItem('token');
       if (savedToken) {
         try {
-          setToken(savedToken);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
           const response = await axios.get(`${API_BASE_URL}/auth/me`);
           setUser(response.data.user);
         } catch (error) {
@@ -113,7 +131,8 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
-    isAuthenticated: !!user
+    isAuthenticated: !!user,
+    apiBaseUrl: API_BASE_URL,
   };
 
   return (
