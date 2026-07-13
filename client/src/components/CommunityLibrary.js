@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -15,7 +15,6 @@ const CommunityLibrary = () => {
   const [sortBy, setSortBy] = useState('uploadDate');
   const [topics, setTopics] = useState([]);
   const [showUploadForm, setShowUploadForm] = useState(false);
-  const [pagination, setPagination] = useState({});
   
   // Upload form state
   const [uploadForm, setUploadForm] = useState({
@@ -24,10 +23,10 @@ const CommunityLibrary = () => {
     file: null
   });
 
-  const { user } = useAuth();
+  useAuth();
 
   // Fetch materials
-  const fetchMaterials = async (page = 1) => {
+  const fetchMaterials = useCallback(async (page = 1) => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -44,7 +43,6 @@ const CommunityLibrary = () => {
       const response = await axios.get(`${API_BASE_URL}/materials?${params}`);
       setMaterials(response.data.materials);
       setTopics(response.data.topics);
-      setPagination(response.data.pagination);
       setError('');
     } catch (err) {
       console.error('Error fetching materials:', err);
@@ -52,11 +50,11 @@ const CommunityLibrary = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm, selectedTopic, selectedDifficulty, sortBy]);
 
   useEffect(() => {
     fetchMaterials();
-  }, [searchTerm, selectedTopic, selectedDifficulty, sortBy]);
+  }, [fetchMaterials]);
 
   // Handle file upload
   const handleUpload = async (e) => {

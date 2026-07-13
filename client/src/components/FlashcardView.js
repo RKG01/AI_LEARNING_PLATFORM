@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useProgress } from '../contexts/ProgressContext';
 
@@ -12,7 +12,7 @@ const FlashcardView = ({ fileId }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const { updateProgress } = useProgress();
 
-  const fetchFlashcards = async () => {
+  const fetchFlashcards = useCallback(async () => {
     if (!fileId) return;
     
     try {
@@ -29,7 +29,7 @@ const FlashcardView = ({ fileId }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [fileId]);
 
   useEffect(() => {
     if (fileId) {
@@ -38,7 +38,7 @@ const FlashcardView = ({ fileId }) => {
       setFlashcards(null);
       setError('');
     }
-  }, [fileId]);
+  }, [fileId, fetchFlashcards]);
 
   const handleCardClick = async () => {
     setIsFlipped(!isFlipped);
