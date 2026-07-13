@@ -3,8 +3,11 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const passport = require('../config/passport');
 
 const router = express.Router();
+
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 // Generate JWT token
 const generateToken = (userId) => {
@@ -151,5 +154,37 @@ router.post('/logout', auth, async (req, res) => {
     res.status(500).json({ error: 'Failed to logout' });
   }
 });
+
+// ── Google OAuth ──────────────────────────────────────────────
+router.get('/google', (req, res, next) => {
+  if (!process.env.GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID === 'your_google_client_id') {
+    return res.status(503).json({ error: 'Google OAuth is not configured on this server.' });
+  }
+  passport.authenticate('google', { scope: ['profile', 'email'], session: false })(req, res, next);
+});
+
+router.get('/google/callback',
+  passport.authenticate('google', { session: false, failureRedirect: `${FRONTEND_URL}?oauth_error=google_failed` }),
+  (req, res) => {
+    const token = generateToken(req.user._id);
+    res.redirect(`${FRONTEND_URL}?oauth_token=${token}`);
+  }
+);
+
+// ── GitHub OAuth ──────────────────────────────────────────────
+router.get('/github', (req, res, next) => {
+  if (!process.env.GITHUB_CLIENT_ID || process.env.GITHUB_CLIENT_ID === 'your_github_client_id') {
+    return res.status(503).json({ error: 'GitHub OAuth is not configured on this server.' });
+  }
+  passport.authenticate('github', { scope: ['user:email'], session: false })(req, res, next);
+});
+
+router.get('/github/callback',
+  passport.authenticate('github', { session: false, failureRedirect: `${FRONTEND_URL}?oauth_error=github_failed` }),
+  (req, res) => {
+    const token = generateToken(req.user._id);
+    res.redirect(`${FRONTEND_URL}?oauth_token=${token}`);
+  }
+);
 
 module.exports = router;
