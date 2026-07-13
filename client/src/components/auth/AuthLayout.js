@@ -314,7 +314,7 @@ const AuthLayout = ({ children, heading, subheading }) => {
             <p style={S.heroSub}>{subheading}</p>
           </div>
 
-          <ul style={S.featureList} role="list">
+          <ul style={S.featureList}>
             {FEATURES.map(f => (
               <li key={f.title} style={S.feature}>
                 <span style={S.featureIcon} aria-hidden="true">{f.icon}</span>

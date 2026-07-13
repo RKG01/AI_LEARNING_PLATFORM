@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
 
@@ -18,10 +18,10 @@ export const ProgressProvider = ({ children }) => {
     const [progress, setProgress] = useState(null);
     const [loading, setLoading] = useState(true);
     const [achievements, setAchievements] = useState([]);
-    const { user, isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAuth();
 
     // Fetch progress data
-    const fetchProgress = async () => {
+    const fetchProgress = useCallback(async () => {
         if (!isAuthenticated) {
             setLoading(false);
             return;
@@ -36,7 +36,7 @@ export const ProgressProvider = ({ children }) => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [isAuthenticated]);
 
     // Update progress
     const updateProgress = async (action, data = {}) => {
@@ -166,7 +166,7 @@ export const ProgressProvider = ({ children }) => {
             setAchievements([]);
             setLoading(false);
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, fetchProgress]);
 
 
     const value = {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { useProgress } from '../contexts/ProgressContext';
 
@@ -19,7 +19,13 @@ const SummaryView = ({ fileId }) => {
   const utteranceRef = useRef(null);
   const { updateProgress } = useProgress();
 
-  const fetchSummary = async () => {
+  const stopSpeech = useCallback(() => {
+    speechSynthesis.cancel();
+    setIsPlaying(false);
+    setIsPaused(false);
+  }, []);
+
+  const fetchSummary = useCallback(async () => {
     if (!fileId) return;
     
     try {
@@ -29,7 +35,6 @@ const SummaryView = ({ fileId }) => {
       const response = await axios.get(`${API_BASE_URL}/summary/${fileId}`);
       setSummary(response.data);
       
-      // Update progress tracking for summary generation
       try {
         await updateProgress('summary');
       } catch (error) {
@@ -41,7 +46,7 @@ const SummaryView = ({ fileId }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [fileId, updateProgress]);
 
   // Load available voices
   useEffect(() => {
@@ -76,9 +81,9 @@ const SummaryView = ({ fileId }) => {
     } else {
       setSummary(null);
       setError('');
-      stopSpeech(); // Stop speech when changing files
+      stopSpeech();
     }
-  }, [fileId]);
+  }, [fileId, fetchSummary, stopSpeech]);
 
   // Voice control functions
   const playSummary = () => {
@@ -131,12 +136,6 @@ const SummaryView = ({ fileId }) => {
       speechSynthesis.resume();
       setIsPaused(false);
     }
-  };
-
-  const stopSpeech = () => {
-    speechSynthesis.cancel();
-    setIsPlaying(false);
-    setIsPaused(false);
   };
 
   const handleVoiceChange = (e) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useProgress } from '../contexts/ProgressContext';
 
@@ -14,7 +14,7 @@ const QuizView = ({ fileId }) => {
   const [numQuestions, setNumQuestions] = useState(20);
   const { updateProgress } = useProgress();
 
-  const fetchQuiz = async (questionCount = numQuestions) => {
+  const fetchQuiz = useCallback(async (questionCount = numQuestions) => {
     if (!fileId) return;
     
     try {
@@ -32,7 +32,7 @@ const QuizView = ({ fileId }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [fileId, numQuestions]);
 
   useEffect(() => {
     if (fileId) {
@@ -41,7 +41,7 @@ const QuizView = ({ fileId }) => {
       setQuiz(null);
       setError('');
     }
-  }, [fileId]);
+  }, [fileId, fetchQuiz]);
 
   const handleAnswerChange = (questionIndex, answerIndex) => {
     setAnswers({
